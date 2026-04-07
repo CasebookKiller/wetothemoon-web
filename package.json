@@ -17,6 +17,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.95.3",
     "@telegram-apps/telegram-ui": "^2.1.9",
+    "@tinkoff/invest-js": "^1.27.0",
     "@tma.js/sdk-react": "^3.0.8",
     "@tonconnect/ui-react": "^2.4.1",
     "eruda": "^3.4.3",

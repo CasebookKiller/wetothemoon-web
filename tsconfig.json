@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
@@ -15,6 +14,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "baseUrl": ".",
     "paths": {
       "@root/*": ["../src/*"],  // путь к корневому проекту
       "@/*": [
@@ -28,7 +28,8 @@
     "useDefineForClassFields": true,
     "types": [
       "vite/client"
-    ]
+    ],
+    "ignoreDeprecations": "6.0"
   },
   "include": [
     "src"

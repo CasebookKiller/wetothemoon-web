@@ -1,0 +1,54 @@
+const erudaon = false;
+const strictmode = false; // StrictMode дублирует рендеринг компонентов в режиме разработки
+
+import ReactDOM from 'react-dom/client';
+
+import { Root } from '@/components/Root.tsx';
+import { EnvUnsupported } from '@/components/EnvUnsupported.tsx';
+
+import { init } from '@/init.ts';
+
+// CSS
+import 'primereact/resources/themes/lara-dark-cyan/theme.css';
+import 'primeflex/primeflex.css';
+import 'primeflex/themes/primeone-dark.css';
+import 'primeicons/primeicons.css';
+
+// Включаем стили пользовательского интерфейса, чтобы наш код мог переопределять CSS пакета.
+import '@/index.css';
+import React, { StrictMode } from 'react';
+
+const root = ReactDOM.createRoot(document.getElementById('root')!);
+
+try {
+  let platform: string;
+
+  const userAgent = navigator.userAgent.toLowerCase();
+
+  if (/iphone|ipad|ipod/.test(userAgent)) {
+    platform = 'ios';
+  } else if (/android/.test(userAgent)) {
+    platform = 'android';
+  } else {
+    platform = 'desktop';
+  }
+
+  // Настройте все зависимости приложения.
+  await init({
+    eruda: erudaon && import.meta.env.VITE_DEBUG && ['ios', 'android'].includes(platform),
+  })
+    .then(() => {
+        root.render(
+        <React.Fragment>
+          {
+            strictmode ? 
+              <StrictMode><Root/></StrictMode>
+            : 
+              <Root/>
+          }
+        </React.Fragment>
+      );
+    });
+} catch (e) {
+  root.render(<EnvUnsupported/>);
+}
